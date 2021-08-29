@@ -25,6 +25,7 @@ import { QuickJoinLayoutClassicComponent } from './layouts/quick-join-layout-cla
 import { JoinComponent } from './pages/join/join.component';
 import { NewMeetingComponent } from './pages/new-meeting/new-meeting.component';
 import { QuickHomeComponent } from './pages/quick-home/quick-home.component';
+import { IonicModule } from '@ionic/angular';
 
 const config: SocketIoConfig = { url: environment.wsUrl, options: { transports: ['websocket'] } };
 
@@ -52,6 +53,7 @@ const config: SocketIoConfig = { url: environment.wsUrl, options: { transports: 
     HttpClientModule,
     SharedModule,
     SocketIoModule.forRoot(config),
+    IonicModule.forRoot(),
   ],
   exports:[
     SharedModule,
