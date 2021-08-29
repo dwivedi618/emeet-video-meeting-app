@@ -1,6 +1,4 @@
 <mat-sidenav-container autosize style="width: 100%;height: 100%;background: #424242!important;position: relative;" class="">
-    
-
     <mat-sidenav id="wc-chat" #sidenav position="end" mode="side">
         <mat-toolbar>
             <div class="spacer"></div>
@@ -14,7 +12,7 @@
             </button>
         </mat-toolbar>
     </mat-sidenav>
-    <mat-sidenav-content >
+    <mat-sidenav-content class="layout">
         <mat-toolbar class="bg-gradient-bottom" style="position: absolute;top: 0;z-index: 1000;">
             <small class="strong text-light pr-3 pl-2">Call with ...</small>
             <div class="spacer"></div>
@@ -28,31 +26,34 @@
             </button>
     
         </mat-toolbar>
-        <mat-grid-list cols="2" rowHeight="2:1">
-            <mat-grid-tile>
-                <video class="w-100"  loop autoplay #one>
-                    <source src="../../../../assets/test-video/simplescreenrecorder-2021-02-04_14.07.09.mp4"
-                        type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </mat-grid-tile>
-            <mat-grid-tile>
-                <video class="w-100" autoplay #remote>
-                </video>
-            </mat-grid-tile>
-            <mat-grid-tile>
-                <video class="w-100" autoplay #local>
-                </video>
-            </mat-grid-tile>
-            <mat-grid-tile>
-                <video class="w-100" loop autoplay #four>
-                </video>
-            </mat-grid-tile>
+        <section >
+            <mat-grid-list cols="2" rowHeight="2:1">
+                <mat-grid-tile>
+                    <video class="w-100"  loop autoplay #one>
+                        <source src="../../../../assets/test-video/simplescreenrecorder-2021-02-04_14.07.09.mp4"
+                            type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <video class="w-100" autoplay #remote>
+                    </video>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <video class="w-100" autoplay #local>
+                    </video>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <video class="w-100" loop autoplay #four>
+                    </video>
+                </mat-grid-tile>
+    
+    
+               
+    
+            </mat-grid-list>
+        </section>
 
-
-           
-
-        </mat-grid-list>
         <div class="layout ">
             <div class="d-flex justify-content-between rounded-lg bg-dark-2 p-0 mat-elevation-z4"
                 style="width: 20rem;position:absolute;bottom: 3rem;">

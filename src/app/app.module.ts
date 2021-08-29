@@ -1,3 +1,4 @@
+import { ConnectingScreenComponent } from './modules/wc/connecting-screen/connecting-screen.component';
 import { SharedModule } from './sharedModules/shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,13 @@ import { WcdialogService } from './services/wc/wcdialog.service';
 import { AlertService } from './services/alert/alert.service';
 import { AuthService } from './services/auth/auth.service';
 import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
+import { QuickJoinLayoutComponent } from './layouts/quick-join-layout/quick-join-layout.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { QuickJoinLayoutClassicComponent } from './layouts/quick-join-layout-classic/quick-join-layout-classic.component';
+import { JoinComponent } from './pages/join/join.component';
+import { NewMeetingComponent } from './pages/new-meeting/new-meeting.component';
+import { QuickHomeComponent } from './pages/quick-home/quick-home.component';
 
 const config: SocketIoConfig = { url: environment.wsUrl, options: { transports: ['websocket'] } };
 
@@ -27,15 +35,26 @@ const config: SocketIoConfig = { url: environment.wsUrl, options: { transports: 
   declarations: [
     AppComponent,
     PrimaryLayoutComponent,
+    QuickJoinLayoutComponent,
+    QuickJoinLayoutClassicComponent,
+    JoinComponent,
+    NewMeetingComponent,
+    QuickHomeComponent,
+    
   ],
   imports: [
     BrowserModule,
-    SharedModule,
     RouterModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    DragDropModule,
+    MatGridListModule,
     HttpClientModule,
+    SharedModule,
     SocketIoModule.forRoot(config),
+  ],
+  exports:[
+    SharedModule,
   ],
   
 

@@ -11,6 +11,7 @@ import { SearchComponent } from 'src/app/components/search/search.component';
 import  {  NgxEmojiPickerModule  }  from  'ngx-emoji-picker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContentEditableDirective } from 'src/app/customDirectives/content-editable.directive';
+import { ConnectingScreenComponent } from 'src/app/modules/wc/connecting-screen/connecting-screen.component';
 
 
 
@@ -22,6 +23,7 @@ import { ContentEditableDirective } from 'src/app/customDirectives/content-edita
     MessageBarComponent,
     AlertWithActionComponent,
     ContentEditableDirective,
+    ConnectingScreenComponent
 
   ],
   imports: [
@@ -42,6 +44,7 @@ import { ContentEditableDirective } from 'src/app/customDirectives/content-edita
     SearchComponent,
     // AlertWithActionComponent,
     MessageBarComponent,
+    ConnectingScreenComponent,
     NgxEmojiPickerModule,
     FormsModule,
     ReactiveFormsModule,

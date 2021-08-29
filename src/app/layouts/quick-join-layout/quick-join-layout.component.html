@@ -1,0 +1,57 @@
+<section class="hero-section inner_banner layout">
+    <header style="position: absolute;top: 0;z-index: 100;color: white;" class="w-100 ">
+        <mat-toolbar class="" style="background: rgba(0, 0, 0, 0);color: white;">
+            <div matLine>
+                <span><svg style="width: 32px;" xmlns="http://www.w3.org/2000/svg" class="ionicon"
+                        viewBox="0 0 512 512">
+                        <title>Videocam</title>
+                        <path
+                            d="M374.79 308.78L457.5 367a16 16 0 0022.5-14.62V159.62A16 16 0 00457.5 145l-82.71 58.22A16 16 0 00368 216.3v79.4a16 16 0 006.79 13.08z"
+                            fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="32" />
+                        <path
+                            d="M268 384H84a52.15 52.15 0 01-52-52V180a52.15 52.15 0 0152-52h184.48A51.68 51.68 0 01320 179.52V332a52.15 52.15 0 01-52 52z"
+                            fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" />
+                    </svg>
+                </span><span class="text-thin">E</span><span class="text-thin">MEET</span>
+            </div>
+            <div class="spacer"></div>
+            <!-- <span style="font-weight:500;text-shadow: 2px 4px 8px 10px solid #000000;padding: 0 1rem;">{{today | date : 'short'}}</span>
+            <app-avatar></app-avatar> -->
+        </mat-toolbar>
+    </header>
+    <div class="row w-100">
+        <div class="col-md-6 layout mb-5">
+            <div class="text-left">
+                <h3 class="slogun-other" style="font-weight: 500;">Introducing </h3>
+                <h2 class="slogun-primary" >EMEET: Video Meeting App</h2>
+                <h2 class="slogun-secondary" style="font-weight: 200;"> Now free for everyone</h2>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class=" layout">
+                <div class="layout base-container mat-elevation-z16">
+                    <img class="base-image" src="../../../assets/images/spacemeet.jpg" alt="">
+                    <img class="base-image" src="../../../assets/images/baseimg2.jpg" alt="">
+        
+                    <main class="quick-pages">
+                        <router-outlet></router-outlet>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+    <footer class="login-help">
+        <button mat-mini-fab color="acct" [matMenuTriggerFor]="loginHelp">
+            <mat-icon>help</mat-icon>
+        </button>
+        <mat-menu #loginHelp="matMenu" class="layout">
+            <a mat-menu-item>
+                <mat-icon mat-list-icon>admin_panel_settings</mat-icon>
+                <span>Switch to Admin</span>
+            </a>
+        </mat-menu>
+    </footer>
+</section>

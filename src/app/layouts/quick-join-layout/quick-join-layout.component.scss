@@ -1,0 +1,113 @@
+ // QUICK CLASSIC PAGES,LAYOUT CSS
+ .text-thin{
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-size: 16px;
+}
+section.hero-section{
+  width: 100vw;
+  height: 100vh;
+}
+
+
+.inner_banner{    
+  position: relative;
+  z-index: 101;
+  // background: url(../../../assets/images/spacemeet.jpg) top center no-repeat; background-size: cover;
+}
+.inner_banner::before{
+  content: ""; 
+  backdrop-filter: blur(10px);
+  // background: -webkit-linear-gradient(45deg, #210046, #0017b952); 
+  background: linear-gradient(45deg, #00000041, var(--ultra-light)); 
+  position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;}
+.inner_banner_in{position: relative;     text-align: center;
+  background: rgb(31 20 84 / 61%);
+  height: 200px;
+  padding-top: 60px;
+  box-sizing: border-box;
+  color: #fff;}
+
+
+
+.login-help{
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+
+.thumbnail-spread{
+  width: 100vw;
+  height: 60vh;
+  border-radius: 0.2rem;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.base-container{
+    position: relative;
+  height: 40vh;
+  width: 70vw;
+  border-radius: 10rem;
+ 
+}
+
+.quick-pages{
+  min-width: 25vw;
+  min-height: 40vh;
+  border-radius: 1rem;
+  background: white;
+  position: absolute;
+  overflow: hidden;
+  
+}
+
+.base-image{
+  height: inherit;
+  width: 50%;
+  border-radius: inherit;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.slogun-primary{
+  font-weight: 500;
+  font-size: 3rem;
+}
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .slogun-primary{
+      font-size: 1.2rem!important;
+      margin-bottom: 0;
+
+  }
+  .slogun-other{
+      margin-bottom: -1rem;
+  }
+  .slogun-secondary{
+      text-align: center;
+  }
+  .quick-pages{
+      min-width: 18rem;
+      min-height: 40vh;
+      border-radius: 1rem;
+      background: white;
+      position: absolute;
+      overflow: hidden;
+    }
+
+}
+@media only screen and (max-width: 1268px) {
+  /* For mobile phones: */
+  .slogun-primary{
+      line-height: 3rem;
+  }
+}
+@media only screen and (width: 668px) {
+  /* For mobile phones: */
+  .slogun-primary{
+      font-size: 3rem;
+      line-height: normal!important;
+  }
+}

@@ -1,0 +1,68 @@
+ // QUICK CLASSIC PAGES,LAYOUT CSS
+
+
+
+
+
+
+
+ .quick-page{
+    min-width: 25vw;
+    min-height: 40vh;
+    border-radius: 1rem;
+    background: white;
+    position: relative;
+
+  }
+  .logo-lg-container,.join-page{
+    position: relative;
+    min-height: inherit;
+  }
+
+  .base-image{
+    height: inherit;
+    width: 50%;
+    border-radius: inherit;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+  .slogun-primary{
+    font-weight: 500;
+    font-size: 3rem;
+  }
+  @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .slogun-primary{
+        font-size: 1.2rem!important;
+        margin-bottom: 0;
+
+    }
+    .slogun-other{
+        margin-bottom: -1rem;
+    }
+    .slogun-secondary{
+        text-align: center;
+    }
+    .quick-pages{
+        min-width: 18rem;
+        min-height: 40vh;
+        border-radius: 1rem;
+        background: white;
+        position: absolute;
+        overflow: hidden;
+      }
+
+  }
+  @media only screen and (max-width: 1268px) {
+    /* For mobile phones: */
+    .slogun-primary{
+        line-height: 3rem;
+    }
+  }
+  @media only screen and (width: 668px) {
+    /* For mobile phones: */
+    .slogun-primary{
+        font-size: 3rem;
+        line-height: normal!important;
+    }
+  }

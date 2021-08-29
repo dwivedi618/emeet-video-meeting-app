@@ -16,6 +16,8 @@ import {MatInputModule} from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatPaginatorModule,
     MatCardModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    DragDropModule,
+    MatGridListModule
   
   ],
   exports: [
@@ -57,7 +61,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatPaginatorModule,
     MatCardModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    DragDropModule,
+    MatGridListModule
   ]
 })
 export class MaterialModule { }
