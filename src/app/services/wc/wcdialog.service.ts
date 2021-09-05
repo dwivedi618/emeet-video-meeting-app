@@ -11,14 +11,15 @@ export class WcdialogService {
 
   constructor(public dialog : MatDialog,private router : Router) { }
 
-  openWcDialog(){
+  openWcDialog(joinCode){
     const wcdialog = this.dialog.open(ConnectingScreenComponent,{
       width : '100vw',
       maxWidth : '100vw',
       maxHeight:'100vh',
       height : '100vh',
       disableClose : true,
-      hasBackdrop : false
+      hasBackdrop : false,
+      data: joinCode
     })
 
     wcdialog.afterClosed().subscribe(close =>{

@@ -28,29 +28,10 @@
         </mat-toolbar>
         <section >
             <mat-grid-list cols="2" rowHeight="2:1">
-                <mat-grid-tile>
-                    <video class="w-100"  loop autoplay #one>
-                        <source src="../../../../assets/test-video/simplescreenrecorder-2021-02-04_14.07.09.mp4"
-                            type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+
+                <mat-grid-tile *ngFor="let stream of remoteStreams">
+                    <video class="w-100 videos" [srcObject]="stream" autoplay></video>                    
                 </mat-grid-tile>
-                <mat-grid-tile>
-                    <video class="w-100" autoplay #remote>
-                    </video>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                    <video class="w-100" autoplay #local>
-                    </video>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                    <video class="w-100" loop autoplay #four>
-                    </video>
-                </mat-grid-tile>
-    
-    
-               
-    
             </mat-grid-list>
         </section>
 

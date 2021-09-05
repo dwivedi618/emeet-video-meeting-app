@@ -41,7 +41,7 @@ const config: SocketIoConfig = { url: environment.wsUrl, options: { transports: 
     JoinComponent,
     NewMeetingComponent,
     QuickHomeComponent,
-    
+    ConnectingScreenComponent
   ],
   imports: [
     BrowserModule,

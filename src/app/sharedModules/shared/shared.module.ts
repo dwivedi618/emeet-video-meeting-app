@@ -1,5 +1,5 @@
 import { AlertWithActionComponent } from './../../components/alert-with-action/alert-with-action.component';
-import { MessageBarComponent } from './../../components/message-bar/message-bar.component';
+// import { MessageBarComponent } from './../../components/message-bar/message-bar.component';
 import { HeaderComponent } from './../../components/header/header.component';
 
 import { NgModule } from '@angular/core';
@@ -11,7 +11,7 @@ import { SearchComponent } from 'src/app/components/search/search.component';
 import  {  NgxEmojiPickerModule  }  from  'ngx-emoji-picker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContentEditableDirective } from 'src/app/customDirectives/content-editable.directive';
-import { ConnectingScreenComponent } from 'src/app/modules/wc/connecting-screen/connecting-screen.component';
+// import { ConnectingScreenComponent } from 'src/app/modules/wc/connecting-screen/connecting-screen.component';
 
 
 
@@ -20,10 +20,10 @@ import { ConnectingScreenComponent } from 'src/app/modules/wc/connecting-screen/
     HeaderComponent,
     AvatarComponent,
     SearchComponent,
-    MessageBarComponent,
+    // MessageBarComponent,
     AlertWithActionComponent,
     ContentEditableDirective,
-    ConnectingScreenComponent
+    // ConnectingScreenComponent
 
   ],
   imports: [
@@ -43,8 +43,8 @@ import { ConnectingScreenComponent } from 'src/app/modules/wc/connecting-screen/
     AvatarComponent,
     SearchComponent,
     // AlertWithActionComponent,
-    MessageBarComponent,
-    ConnectingScreenComponent,
+    // MessageBarComponent,
+    // ConnectingScreenComponent,
     NgxEmojiPickerModule,
     FormsModule,
     ReactiveFormsModule,

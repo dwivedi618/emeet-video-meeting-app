@@ -9,13 +9,14 @@ import { WcdialogService } from 'src/app/services/wc/wcdialog.service';
 export class NewMeetingComponent implements OnInit {
   isJoining : boolean = false
   today = new Date()
-
+  joinCode: String;
   constructor(
     private callDialogService : WcdialogService
   ) { }
 
   ngOnInit(): void {
-    this.callDialogService.openWcDialog()
+    this.joinCode = 'abc-pqr-xyz'
+    this.callDialogService.openWcDialog(this.joinCode)
   }
 
 }
