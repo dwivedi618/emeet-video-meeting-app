@@ -8,8 +8,8 @@ export const environment = {
   // wsUrl: 'http://192.168.1.105:3000'
   
 
-  apiUrl: 'http://192.168.225.247:3000/v1',
-  wsUrl: 'http://192.168.225.247:3000'
+  apiUrl: 'http://192.168.225.59:3000/v1',
+  wsUrl: 'http://192.168.225.59:3000'
 };
 
 /*

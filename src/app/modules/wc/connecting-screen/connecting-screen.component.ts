@@ -34,10 +34,10 @@ export class ConnectingScreenComponent implements OnInit {
   // @ViewChild('remote') remote: ElementRef;
   // @ViewChild('three') one: ElementRef;
   // @ViewChild('four') four: ElementRef;
-  i: Number = 0;
-  streams: Array<Number> = [1,2,3,4]
+  // i: Number = 0;
+  // streams: Array<Number> = [1,2,3,4]
   rpc: RTCPeerConnection [];
-  pc: RTCPeerConnection;
+  pc: Map<String, RTCPeerConnection>;
   localStream: MediaStream;
   remoteStreams: MediaStream [] = [];
   // remoteStreams: Map<String, MediaStream>;
@@ -54,34 +54,48 @@ export class ConnectingScreenComponent implements OnInit {
     console.log("JOIOIIOINNNCODE", this.joinCode);
 
     this.socket.on('new-joining', async ( socketId ) => {
-      const offer = await this.pc.createOffer(); 
-      await this.pc.setLocalDescription(offer);
-      this.socket.emit('offer', {to: socketId, desc: offer });
+      if(!this.pc.get(socketId)) await this.createPeerConnection(socketId);
+      const offer = await this.pc.get(socketId).createOffer(); 
+      await this.pc.get(socketId).setLocalDescription(offer);
+      this.socket.emit('offer', { to: socketId, desc: offer });
     });
 
     this.socket.on('offer',async (data) => {
-        console.log(`A offer from ${data.from} has been recieved on ${new Date()}`);
+        console.log(`An offer from ${data.from} has been recieved on ${new Date()}`);
+        if(!this.pc.get(data.from)) await this.createPeerConnection(data.from);
+
         this.desc.set(data.from, data.desc);
+        console.log('this.desc',this.desc);
+        
         await this.handleOffer( data.from, data.desc );
     });
 
     this.socket.on('answer',async (data) => {
       console.log(`An answer from ${data.from} has been recieved on ${new Date()}`);
       this.desc.set(data.from, data.desc);
-      await this.handleAnswer( data.desc );
+      await this.handleAnswer( data.from, data.desc );
     }); 
 
     this.socket.on('icecandidate',async (data) => {
       console.log(`A candidate from ${data.from} has been recieved on ${new Date()}`);
-      if(this.desc.get(data.from)) this.handelIceCandidate( data.candidate );
+      if(this.desc.get(data.from)) this.handelIceCandidate( data.from, data.candidate );
     });
 
   }
 
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.desc = new Map();
-    this.createPeerConnection();    
+    this.pc = new Map();
+    try{
+      this.localStream = await navigator.mediaDevices.getUserMedia({audio: false, video: true});
+      this.remoteStreams.push(this.localStream)
+      
+    } catch(e){
+      console.error('Error in getting user media devices',e);
+      return;
+    }
+    // await this.createPeerConnection(socketId);    
     this.socket.emit('join-me', { roomId: this.joinCode });
   }
 
@@ -89,7 +103,7 @@ export class ConnectingScreenComponent implements OnInit {
   ngOnDestroy(){
     this.localStream.getTracks()[0].stop()
     this.remoteStreams.forEach(stream => stream.getTracks()[0].stop());
-    this.pc.close();
+    this.pc.forEach(pc => pc.close());
     this.pc = null;
     this.router.navigate(['']);
   }
@@ -97,43 +111,47 @@ export class ConnectingScreenComponent implements OnInit {
 
 
   async handleOffer(socketId: String, offer: RTCSessionDescription){
-
-    if(this.pc.signalingState != 'stable'){
+    if(!this.pc.get(socketId)) await this.createPeerConnection(socketId);
+    console.log('handling ooofffffferrrrrrrrrr', this.pc.get(socketId).signalingState);
+    
+    if(this.pc.get(socketId).signalingState != 'stable'){
       await Promise.all([
-        this.pc.setLocalDescription({type: 'rollback'}),
-        this.pc.setRemoteDescription(offer)
+        this.pc.get(socketId).setLocalDescription({type: 'rollback'}),
+        this.pc.get(socketId).setRemoteDescription(offer)
       ]);
       return;
 
     }else{
-      await this.pc.setRemoteDescription(offer);
+      await this.pc.get(socketId).setRemoteDescription(offer);
     }
 
     try{
-      const answer = await this.pc.createAnswer(); 
-      await this.pc.setLocalDescription(answer);
+      const answer = await this.pc.get(socketId).createAnswer(); 
+      await this.pc.get(socketId).setLocalDescription(answer);
     }catch(e){  
       console.log('ERROR: error in in creating answer and setting local description', e);
     }
 
-    this.socket.emit('answer', {to: socketId, desc: this.pc.localDescription})
+    this.socket.emit('answer', {to: socketId, desc: this.pc.get(socketId).localDescription})
 
   }
 
 
 
-  async handleAnswer(answer: RTCSessionDescription){    
+  async handleAnswer(socketId, answer: RTCSessionDescription){    
     try{
-      await this.pc.setRemoteDescription( answer );
+      if(!this.pc.get(socketId)) await this.createPeerConnection(socketId);
+      await this.pc.get(socketId).setRemoteDescription( answer );
     }catch(e){
       console.error('ERROR: error in handling answer', e) ;      
     }
   }
 
-  async handelIceCandidate(icecandidate: RTCIceCandidate){
+  async handelIceCandidate(socketId,icecandidate: RTCIceCandidate){
+    // if(!this.pc.get(socketId)) await this.createPeerConnection(socketId);
     let candidate = new RTCIceCandidate(icecandidate);
     try{
-      await this.pc.addIceCandidate(candidate);
+      await this.pc.get(socketId).addIceCandidate(candidate);
     }catch(e){
       console.error('Error in adding ICE Candidate',e);
       return;
@@ -142,13 +160,13 @@ export class ConnectingScreenComponent implements OnInit {
 
 
 
-  async createPeerConnection() {
-    this.pc = new RTCPeerConnection({});
+  async createPeerConnection(socketId) {
+    this.pc.set(socketId, new RTCPeerConnection({}));
 
     /**
      * Add event listner and handler for the ICECandidate
      */
-    this.pc.addEventListener('icecandidate', (event) => {
+    this.pc.get(socketId).addEventListener('icecandidate', (event) => {
       if(event.candidate) this.socket.emit('icecandidate', {candidate: event.candidate, to: this.joinCode});
     });
 
@@ -174,7 +192,7 @@ export class ConnectingScreenComponent implements OnInit {
     /**
      * Listen  and handle the event for incomming video stream
      */
-    this.pc.addEventListener('track', (event) => {
+    this.pc.get(socketId).addEventListener('track', (event) => {
       if(event.streams && event.streams[0]){
         this.remoteStreams.push(event.streams[0]);
         console.log('------Getting the event track2---->>>>>>>',event );
@@ -192,17 +210,17 @@ export class ConnectingScreenComponent implements OnInit {
     });
 
 
-    try{
-      this.localStream = await navigator.mediaDevices.getUserMedia({audio: false, video: true});
-      this.remoteStreams.push(this.localStream)
+    // try{
+    //   this.localStream = await navigator.mediaDevices.getUserMedia({audio: false, video: true});
+    //   this.remoteStreams.push(this.localStream)
       
-    } catch(e){
-      console.error('Error in getting user media devices',e);
-      return;
-    }
+    // } catch(e){
+    //   console.error('Error in getting user media devices',e);
+    //   return;
+    // }
 
     try{
-      this.localStream.getTracks().forEach(track => this.pc.addTrack(track, this.localStream));
+      this.localStream.getTracks().forEach(track => this.pc.get(socketId).addTrack(track, this.localStream));
     }catch(e){
       console.error('Error in adding transciever');
       return;
